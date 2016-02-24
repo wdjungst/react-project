@@ -1,6 +1,10 @@
 React Project: State of the Art Web Development
 ===============================================
 
+A dependency, not a boilerplate, to make your React project a delight to
+develop with great stuff like hot module replacement and best practices
+for deployment built in.
+
 This is brand new, not ready for production unless you are ready and
 willing to contribute to the project. Basically just building something
 we want here, if it interests you, please help :)
@@ -10,21 +14,23 @@ Also, it has no tests. Also, it's awesome.
 
 
 
-## Get Started
+## Getting Started
 
-First of all, global npm installs are not the cat's pajamas, so you need
-to make your own project first.
-
-Second, npm scripts are the bees knees, so we're just going to provide
-some for you.
+Don't clone this repo, it's not a boilerplate. Do this:
 
 ```
+# don't like global npm installs, so you get to make the project
 mkdir best-app-of-your-life
 cd best-app-of-your-life
 npm init .
 # follow prompts
 
+# react project is a dependency, not a boilerplate, install it
 npm install react-project --save
+
+# You probably want a bit of boilerplate to get started though.
+# There isn't much here, it just connects the pieces that
+# react-project gives you
 node_modules/.bin/react-project init
 # follow prompts
 
