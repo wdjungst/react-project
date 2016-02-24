@@ -125,6 +125,8 @@ more.
   the framework are imported into the app, the app is not imported into
   the framework.
 - Escape hatches are important.
+- Upgrading should be simple, benefits should come w/o changing app
+  code usually.
 
 
 
