@@ -24,6 +24,16 @@ export function getDXConfig() {
   return getPackageJSON()['react-project']
 }
 
+export function copyProps(source, target, field) {
+  if (!target[field])
+    target[field] = {}
+
+  for (const key in source[field]) {
+    if (!target[field][key])
+      target[field][key] = source[field][key]
+  }
+}
+
 function validatePackageJSON(appPackageJSON) {
   if (!appPackageJSON['react-project']) {
     logNoDX()

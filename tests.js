@@ -13,6 +13,8 @@ describe('react-project', () => {
     })
     it('uses PUBLIC_PATH')
     it('uses NODE_ENV')
+    it('prompts to continue if app deps differ from blueprint')
+    it('bails when there are missing deps and provides a copy/paste line to install')
   })
   describe('build', () => {
     it('splits vendor code out')

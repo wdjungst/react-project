@@ -1,8 +1,7 @@
 /*global cp*/
-import { prompt } from 'prompt-sync'
 import fs from 'fs'
-import { log, logError, logPrompt } from './LogUtils'
-import { getPackageJSON, pkgPath } from './PackageUtils'
+import { log, promptApproval } from './LogUtils'
+import { getPackageJSON, pkgPath, copyProps } from './PackageUtils'
 import 'shelljs/global'
 import path from 'path'
 import { APP_PATH } from './Constants'
@@ -37,26 +36,6 @@ export default function init(cb) {
   log('  npm install && npm start')
   log('')
   cb()
-}
-
-function copyProps(source, target, field) {
-  if (!target[field])
-    target[field] = {}
-
-  for (const key in source[field]) {
-    if (!target[field][key])
-      target[field][key] = source[field][key]
-  }
-}
-
-function promptApproval(msg) {
-  logPrompt(msg, '(y/N)')
-  const approval = prompt({ sigint: true })
-  const controlCd = approval === null
-  if (controlCd || approval.toLowerCase().trim() !== 'y') {
-    logError('FINE!')
-    process.exit()
-  }
 }
 
 //function checkDotEnv(cb) {
