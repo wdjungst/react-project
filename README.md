@@ -12,12 +12,23 @@ Also, it has no tests. Also, it's awesome.
 
 ## Get Started
 
+First of all, global npm installs are not the cat's pajamas, so you need
+to make your own project first.
+
+Second, npm scripts is the bees knees, so we're just going to provide
+some for you.
+
 ```
 mkdir best-app-of-your-life
 cd best-app-of-your-life
 npm init .
+# follow prompts
+
 npm install react-project --save
 node_modules/.bin/react-project init
+# follow prompts
+
+# and from now on you only deal with npm scripts
 npm install
 npm start
 ```
@@ -39,7 +50,8 @@ Also:
 NODE_ENV=production npm start
 ```
 
-Minified, gzipped, long-term hashed assets and server-pre-rendering.
+Minified, gzipped, long-term hashed assets and server-pre-rendering, and
+more.
 
 
 
