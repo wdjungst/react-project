@@ -8,7 +8,7 @@ export const ENTRY = {
     'react',
     'react-dom',
     'react-router',
-    'dx'
+    'react-project'
   ]
 }
 

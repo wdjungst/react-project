@@ -80,13 +80,13 @@ function getPlugins() {
   const plugins = SHARED_CLIENT.PLUGINS.slice(0)
   plugins.push(
     new webpack.BannerPlugin(`
-      if (!window.__dxDebugRan__) {
-        window.__dxDebugRan__ = true
-        console.debug('[dx] NODE_ENV=${process.env.NODE_ENV}');
-        console.debug('[dx] AUTO_REFRESH=${process.env.AUTO_RELOAD}');
+      if (!window.__reactProjectDebugRan__) {
+        window.__reactProjectDebugRan__ = true
+        console.debug('[react-project] NODE_ENV=${process.env.NODE_ENV}');
+        console.debug('[react-project] AUTO_REFRESH=${process.env.AUTO_RELOAD}');
         if (!location.search.match(/__ssr/)) {
            console.debug(
-             '[dx] SSR disabled in dev. Enable with',
+             '[react-project] SSR disabled in dev. Enable with',
              location.search ? location.href + '&__ssr' : location.href + '?__ssr'
            );
         }

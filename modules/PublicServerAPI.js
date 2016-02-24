@@ -57,7 +57,7 @@ export function createServer({ renderDocument, renderApp, routes }) {
   server._listen = server.listen
 
   server.listen = () => {
-    throw new Error('[dx]', 'Do not call `server.listen()`, use `server.start()`')
+    throw new Error('[react-project]', 'Do not call `server.listen()`, use `server.start()`')
   }
 
   server.start= () => {

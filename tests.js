@@ -1,5 +1,5 @@
 /*eslint-env mocha*/
-describe('dx', () => {
+describe('react-project', () => {
   describe('init', () => {
     it('initializes a new project')
   })
@@ -27,7 +27,7 @@ describe('dx', () => {
   })
 })
 
-describe('dx/server', () => {
+describe('react-project/server', () => {
   describe('createServer', () => {
     describe('with NODE_ENV=production', () => {
       it('uses gzip compression with')

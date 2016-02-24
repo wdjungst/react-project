@@ -12,7 +12,7 @@ const style = {
 export default function ErrorMessage(props) {
   return (
     <div style={style}>
-      <h1>DX Error</h1>
+      <h1>React Project Error</h1>
       {props.children}
     </div>
   )

@@ -26,9 +26,9 @@ export default {
   externals: [
     function (context, request, callback) {
       const pathStart = request.split('/')[0]
-      // keep dx stuff *in* the bundle so it gets processed through babel (and we don't
+      // keep react-project stuff *in* the bundle so it gets processed through babel (and we don't
       // need to ship a prebundled version :D)
-      if (nodeModules.indexOf(pathStart) >= 0 && request !== 'dx' && request !== 'dx/server') {
+      if (nodeModules.indexOf(pathStart) >= 0 && request !== 'react-project' && request !== 'react-project/server') {
         return callback(null, 'commonjs ' + request)
       }
       callback()

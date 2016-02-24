@@ -21,24 +21,24 @@ export function getPackageJSON() {
 export function getDXConfig() {
   const packageJSON = getPackageJSON()
   validatePackageJSON(packageJSON)
-  return getPackageJSON().dx
+  return getPackageJSON()['react-project']
 }
 
 function validatePackageJSON(appPackageJSON) {
-  if (!appPackageJSON.dx) {
+  if (!appPackageJSON['react-project']) {
     logNoDX()
   }
   if (
-    !appPackageJSON.dx ||
-    !appPackageJSON.dx.client ||
-    !appPackageJSON.dx.server
+    !appPackageJSON['react-project'] ||
+    !appPackageJSON['react-project'].client ||
+    !appPackageJSON['react-project'].server
   ) {
-    logError('No "dx" entry found in package.json')
+    logError('No "react-project" entry found in package.json')
     log('It should look something like this:')
     console.log()
     console.log('  {')
     console.log('    ...')
-    console.log('    "dx": {')
+    console.log('    "react-project": {')
     console.log('      "server": "modules/server.js",')
     console.log('      "client": "modules/client.js"')
     console.log('    }')
@@ -66,12 +66,12 @@ function logNoPackageJSON() {
 }
 
 function logNoDX() {
-  log('No "dx" entry found in package.json')
+  log('No "react-project" entry found in package.json')
   log('It should look something like this:')
   console.log()
   console.log('  {')
   console.log('    ...')
-  console.log('    "dx": {')
+  console.log('    "react-project": {')
   console.log('      "server": "modules/server.js",')
   console.log('      "server": "modules/client.js",')
   console.log('      "webpack": "modules/webpack.config.js"')

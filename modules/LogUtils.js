@@ -2,11 +2,11 @@
 import { red, yellow, green } from 'cli-color'
 
 function logWithColor(color, msgs) {
-  console.log(...[ color('[dx]') ].concat(msgs))
+  console.log(...[ color('[react-project]') ].concat(msgs))
 }
 
 export function log(...msgs) {
-  console.log(...[ '[dx]' ].concat(msgs))
+  console.log(...[ '[react-project]' ].concat(msgs))
 }
 
 export function logError(...msgs) {

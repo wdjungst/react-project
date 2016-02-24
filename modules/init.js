@@ -27,7 +27,7 @@ export default function init(cb) {
   log('Adding scripts to package.json')
   const blueprintPkg = require('../blueprint/package.json')
   copyProps(blueprintPkg, pkg, 'scripts')
-  copyProps(blueprintPkg, pkg, 'dx')
+  copyProps(blueprintPkg, pkg, 'react-project')
   copyProps(blueprintPkg, pkg, 'dependencies')
   fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2))
 

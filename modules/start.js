@@ -19,10 +19,10 @@ export default function start(cb) {
 }
 
 function logDXStartWarning() {
-  logError('Don\'t use `dx start` in production.')
+  logError('Don\'t use `react-project start` in production.')
   log('First add:')
   log()
-  log('  rm -rf .build && dx build && node .build/server.js')
+  log('  rm -rf .build && react-project build && node .build/server.js')
   log()
   log('to your package.json `scripts.start` entry, then use:')
   log()
