@@ -35,6 +35,8 @@
     "express": "4.13.4",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "helmet": "1.1.0",
+    "hpp": "0.2.0",
     "if-env": "1.0.0",
     "karma": "0.13.21",
     "karma-chrome-launcher": "0.2.2",
