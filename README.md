@@ -15,7 +15,7 @@ Also, it has no tests. Also, it's awesome.
 First of all, global npm installs are not the cat's pajamas, so you need
 to make your own project first.
 
-Second, npm scripts is the bees knees, so we're just going to provide
+Second, npm scripts are the bees knees, so we're just going to provide
 some for you.
 
 ```
