@@ -141,7 +141,9 @@ After running `react-project init` your package.json will have some new tasks.
 #### `npm start`
 
 Starts the server. It's smart enough to know which `NODE_ENV` you're in.
-If `NODE_ENV=production` you'll get the full production build.
+If `NODE_ENV=production` you'll get the full production build. If you're
+shipping to heroku, for instance, deploying is just `git push heroku master`.
+It'll create a production build up there.
 
 #### `npm test`
 
