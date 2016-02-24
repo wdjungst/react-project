@@ -17,7 +17,7 @@ mkdir best-app-of-your-life
 cd best-app-of-your-life
 npm init .
 npm install react-project --save
-node_modules/.bin react-project init
+node_modules/.bin/react-project init
 npm install
 npm start
 ```
