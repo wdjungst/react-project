@@ -83,7 +83,7 @@ function logNoDX() {
   console.log('    ...')
   console.log('    "react-project": {')
   console.log('      "server": "modules/server.js",')
-  console.log('      "server": "modules/client.js",')
+  console.log('      "client": "modules/client.js",')
   console.log('      "webpack": "modules/webpack.config.js"')
   console.log('    }')
   console.log('  }')
