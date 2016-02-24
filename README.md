@@ -1,9 +1,8 @@
 React Project: State of the Art Web Development
 ===============================================
 
-A dependency, not a boilerplate, to make your React project a delight to
-develop with great stuff like hot module replacement and best practices
-for deployment built in.
+A dependency--not a boilerplate--to make your React project a delight to
+develop.
 
 This is brand new, not ready for production unless you are ready and
 willing to contribute to the project. Basically just building something
@@ -18,7 +17,7 @@ Also, it has no tests. Also, it's awesome.
 
 Don't clone this repo, it's not a boilerplate. Do this:
 
-```
+```sh
 # don't like global npm installs, so you get to make the project
 mkdir best-app-of-your-life
 cd best-app-of-your-life
