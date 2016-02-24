@@ -33,7 +33,7 @@
     "cli-color": "1.1.0",
     "dotenv": "2.0.0",
     "express": "4.13.4",
-    "prompt-sync": "3.0.1",
+    "prompt": "1.0.0",
     "shelljs": "0.6.0",
     "source-map-support": "0.4.0",
     "webpack": "1.12.13",

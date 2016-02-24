@@ -1,5 +1,5 @@
 /*eslint no-console: 0*/
-import { prompt } from 'prompt-sync'
+import prompt from 'prompt'
 import { red, yellow, green } from 'cli-color'
 
 function logWithColor(color, msgs) {
@@ -23,18 +23,27 @@ export function logTask(...msgs) {
 }
 
 
-export function promptApproval(msg) {
+export function promptApproval(msg, cb) {
   if (process.env.NODE_ENV === 'production') {
     logError('Wanted to prompt approval but skipping because we are in production')
     log('Prompt message was: ', msg)
   } else {
-    logPrompt(msg, '(y/N)')
-    const approval = prompt({ sigint: true })
-    const controlCd = approval === null
-    if (controlCd || approval.toLowerCase().trim() !== 'y') {
-      logError('FINE!')
-      process.exit()
+    prompt.start()
+    const property = {
+      name: 'yesno',
+      message: msg + ' (y|n)',
+      validator: /y|n/,
+      warning: 'Must respond "y" for yes or "n" for no',
+      default: 'n'
     }
+    prompt.get(property, (err, result) => {
+      if (result.yesno === 'y') {
+        cb && cb()
+      } else {
+        logError('FINE!')
+        process.exit()
+      }
+    })
   }
 }
 
