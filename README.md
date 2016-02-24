@@ -134,32 +134,6 @@ As soon as I ship a real app with this, I'll ship 1.0.
 
 ## API
 
-### `react-project` CLI
-
-#### `react-project init`
-
-Initializes the app, copies over a bluebrint app, updates package.json
-with tasks, etc.
-
-#### `react-project build`
-
-Builds the assets, called from `npm start`, not normally called
-directly.
-
-#### `react-project start`
-
-Starts the server. Called from `npm start`, not normally called
-directly.
-
-#### `react-project --help`
-
-[NOT IMPLEMENTED][ni]
-
-#### `react-project --version`
-
-[NOT IMPLEMENTED][ni]
-
-
 ### npm scripts
 
 After running `react-project init` your package.json will have some new tasks.
@@ -316,6 +290,36 @@ will respond with that status:
 ##### `routes`
 
 The app's routes.
+
+
+### `react-project` CLI
+
+It's not intended that you use this directly, task should be done with
+npm scripts.
+
+#### `react-project init`
+
+Initializes the app, copies over a bluebrint app, updates package.json
+with tasks, etc.
+
+#### `react-project build`
+
+Builds the assets, called from `npm start`, not normally called
+directly.
+
+#### `react-project start`
+
+Starts the server. Called from `npm start`, not normally called
+directly.
+
+#### `react-project --help`
+
+[NOT IMPLEMENTED][ni]
+
+#### `react-project --version`
+
+[NOT IMPLEMENTED][ni]
+
 
 
   [ni]:/CONTRIBUTING.md
