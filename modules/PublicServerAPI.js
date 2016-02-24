@@ -21,6 +21,8 @@ import path from 'path'
 import { match } from 'react-router'
 import { flushTitle } from 'react-title-component'
 import compression from 'compression'
+import hpp from 'hpp'
+import helmet from 'helmet'
 import { log } from './LogUtils'
 import { PORT, APP_PATH, PUBLIC_DIR } from './Constants'
 import ErrorMessage from './ErrorMessage'
@@ -37,6 +39,27 @@ export function createServer({ renderDocument, renderApp, routes }) {
   server.disable('x-powered-by')
   server.use(express.static(path.join(APP_PATH, 'static')))
   server.use(bodyParser.json())
+
+  // Security settings
+  // hpp protects against parameter pollution attacks
+  server.use(hpp())
+  // Helmet is a suite of security middleware functions to try and protect
+  // against common attacks. Get more info from the helmet README
+  server.use(helmet.contentSecurityPolicy({
+    defaultSrc: [ "'self'" ],
+    scriptSrc: [ "'self'" ],
+    styleSrc: [ "'self'" ],
+    imgSrc: [ "'self'" ],
+    connectSrc: [ "'self'", 'ws:' ],
+    fontSrc: [ "'self'" ],
+    objectSrc: [ "'none'" ],
+    mediaSrc: [ "'none'" ],
+    frameSrc: [ "'none'" ]
+  }))
+  server.use(helmet.xssFilter())
+  server.use(helmet.frameguard('deny'))
+  server.use(helmet.ieNoOpen())
+  server.use(helmet.noSniff())
 
   server.all('*', (req, res) => {
     match({ routes, location: req.url }, (err, redirect, routerProps) => {
@@ -60,7 +83,7 @@ export function createServer({ renderDocument, renderApp, routes }) {
     throw new Error('[react-project]', 'Do not call `server.listen()`, use `server.start()`')
   }
 
-  server.start= () => {
+  server.start = () => {
     server._listen(PORT, () => {
       log()
       log(`NODE_ENV=${process.env.NODE_ENV}`)
@@ -174,4 +197,3 @@ function sendNoRoutesMatched(res) {
     </ErrorMessage>
   ))
 }
-
