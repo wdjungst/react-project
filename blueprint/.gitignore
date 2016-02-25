@@ -1,7 +1,3 @@
 .build
+.env
 lib
-node_modules
-*.orig
-*.log
-.DS_Store
-Thumbs.db
