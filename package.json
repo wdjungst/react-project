@@ -6,6 +6,8 @@
   "files": [
     "bin/react-project.js",
     "blueprint",
+    "blueprint/.gitignore",
+    "blueprint/.npmrc",
     "lib",
     "index.js",
     "server.js",
