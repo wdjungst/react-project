@@ -24,7 +24,7 @@ export function logTask(...msgs) {
 
 
 export function promptApproval(msg, cb) {
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'production') {
     logError('Wanted to prompt approval but skipping because we are in production or test')
     log('Prompt message was: ', msg)
     cb()
