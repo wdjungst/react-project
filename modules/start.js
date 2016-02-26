@@ -23,7 +23,7 @@ export default function start(cb) {
 function checkDependencies() {
   log('checking app dependencies')
   const pkg = getPackageJSON()
-  const blueprintPkg = require('../blueprint/package.json')
+  const blueprintPkg = require('../blueprint_package.json')
   const missingDeps = []
   const differentDeps = []
   for (const key in blueprintPkg.dependencies) {
