@@ -13,6 +13,13 @@ Also, it has no tests. Also, it's awesome.
 
 
 
+## Contributing
+
+Please see [CONTRIBUTING.md](/CONTRIBUTING.md)
+
+
+
+
 ## Getting Started
 
 Don't clone this repo, it's not a boilerplate. Do this:
@@ -102,14 +109,7 @@ more.
 
 ### Future Features (Pull Requests Welcome!)
 
-- ES2015 everywhere, currently the webpack and test configs aren't
-  babel'd.
-- Hot reloading server code (https://github.com/jlongster/backend-with-webpack does this).
-  You have to restart the server when you change code in `/api` or your
-  server entry, which is a pain.
-- Better Test runner implementation see [here](#test-runner)
-- Redux + data loading (probably just keep it in the blueprint)
-- Server side test runner (for the stuff in /api)
+Please see [CONTRIBUTING.md](/CONTRIBUTING.md) and help out :)
 
 
 
