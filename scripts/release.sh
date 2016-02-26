@@ -43,5 +43,7 @@ git push origin $next_ref
 git push origin latest -f
 
 npm run build
-npm publish
 
+./mv-stuff.js
+npm publish
+./mv-stuff-back.js

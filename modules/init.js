@@ -1,4 +1,4 @@
-/*global cp*/
+/*eslint-env shelljs*/
 import fs from 'fs'
 import { log, promptApproval } from './LogUtils'
 import { getPackageJSON, pkgPath, copyProps } from './PackageUtils'
@@ -16,14 +16,22 @@ export default function init(cb) {
   promptApproval('Do you want to continue?', () => {
     log('copying project blueprint')
     const blueprint = path.join(__dirname, '..', 'blueprint', '/')
+
+    // release.sh moves blueprint/package.json to here
+    const blueprintPkg = require('../blueprint_package.json')
+
     cp('-R', blueprint, APP_PATH)
+
     // cp -R bug https://github.com/shelljs/shelljs/issues/140
-    ;[ '.babelrc', '.env', '.eslintrc', '.gitignore', '.npmrc' ].forEach(file => {
+    ;[ '.babelrc', '.env', '.eslintrc' ].forEach(file => {
       cp(path.join(blueprint, file), path.join(APP_PATH, file))
     })
 
+    // release.sh renames these since npm publish would exclude them otherwise
+    mv(path.join(APP_PATH, 'gitignore'), path.join(APP_PATH, '.gitignore'))
+    mv(path.join(APP_PATH, 'npmrc'), path.join(APP_PATH, '.npmrc'))
+
     log('Adding scripts to package.json')
-    const blueprintPkg = require('../blueprint/package.json')
     copyProps(blueprintPkg, pkg, 'scripts')
     copyProps(blueprintPkg, pkg, 'react-project')
     copyProps(blueprintPkg, pkg, 'dependencies')
