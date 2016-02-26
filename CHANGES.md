@@ -1,6 +1,8 @@
 ## 0.0.5
 
 - allow apps to add express middleware before express routing starts
+- fixed init issues #8, #9
+- added hook for server data hydration
 
 ## 0.0.4
 
