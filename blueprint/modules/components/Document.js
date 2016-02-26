@@ -1,6 +1,6 @@
 import React from 'react'
 
-const { arrayOf, string, node } = React.PropTypes
+const { arrayOf, string, node, object } = React.PropTypes
 
 const shims = `
   (String.prototype.trim && Function.prototype.bind) || document.write('<script src="/es5-shim.js"><\\/script>');
@@ -14,11 +14,12 @@ const Document = React.createClass({
     styles: arrayOf(node),
     scripts: arrayOf(node),
     content: string,
-    title: string
+    title: string,
+    initialState: object
   },
 
   render() {
-    const { styles, scripts, content, title } = this.props
+    const { styles, scripts, content, title, initialState } = this.props
 
     return (
       <html>
@@ -30,6 +31,9 @@ const Document = React.createClass({
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: content }}/>
           <script dangerouslySetInnerHTML={{ __html: shims }}/>
+          {initialState &&
+            <script dangerouslySetInnerHTML={{ __html: `window.INITIAL_STATE = ${JSON.stringify(initialState)};` }}/>
+          }
           {scripts}
         </body>
       </html>
@@ -39,4 +43,3 @@ const Document = React.createClass({
 })
 
 export default Document
-
