@@ -61,22 +61,6 @@ export function createServer({ renderDocument, renderApp, routes }) {
   server.use(helmet.ieNoOpen())
   server.use(helmet.noSniff())
 
-  server.all('*', (req, res) => {
-    match({ routes, location: req.url }, (err, redirect, routerProps) => {
-      if (err) {
-        onError(err, req, res)
-      } else if (redirect) {
-        // TODO: need a way to specify 301, 302, 307 etc. in the route config.
-        // will need to make changes in React Router or history probably
-        res.redirect(redirect.pathname + redirect.search)
-      } else if (routerProps) {
-        sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats, routerProps })
-      } else {
-        sendNoRoutesMatched(res)
-      }
-    })
-  })
-
   server._listen = server.listen
 
   server.listen = () => {
@@ -84,6 +68,22 @@ export function createServer({ renderDocument, renderApp, routes }) {
   }
 
   server.start = () => {
+    server.all('*', (req, res) => {
+      match({ routes, location: req.url }, (err, redirect, routerProps) => {
+        if (err) {
+          onError(err, req, res)
+        } else if (redirect) {
+          // TODO: need a way to specify 301, 302, 307 etc. in the route config.
+          // will need to make changes in React Router or history probably
+          res.redirect(redirect.pathname + redirect.search)
+        } else if (routerProps) {
+          sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats, routerProps })
+        } else {
+          sendNoRoutesMatched(res)
+        }
+      })
+    })
+
     server._listen(PORT, () => {
       log()
       log(`NODE_ENV=${process.env.NODE_ENV}`)
