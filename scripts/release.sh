@@ -44,6 +44,6 @@ git push origin latest -f
 
 npm run build
 
-./mv-stuff.js
+./scripts/mv-stuff.js
 npm publish
-./mv-stuff-back.js
+./scripts/mv-stuff-back.js
