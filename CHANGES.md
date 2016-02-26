@@ -1,3 +1,7 @@
+## 0.0.5
+
+- allow apps to add express middleware before express routing starts
+
 ## 0.0.4
 
 - switched from `prompt-sync` to `prompt` because all of the issues so
