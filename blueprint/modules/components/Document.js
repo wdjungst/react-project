@@ -32,7 +32,9 @@ const Document = React.createClass({
           <div id="app" dangerouslySetInnerHTML={{ __html: content }}/>
           <script dangerouslySetInnerHTML={{ __html: shims }}/>
           {initialState &&
-            <script dangerouslySetInnerHTML={{ __html: `window.INITIAL_STATE = ${JSON.stringify(initialState)};` }}/>
+            <script dangerouslySetInnerHTML={{
+              __html: `window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};`
+            }}/>
           }
           {scripts}
         </body>

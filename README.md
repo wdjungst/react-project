@@ -277,7 +277,11 @@ App-supplied function to render the top-level document. Callback with
 a [`Document`][Document] component. You'll probably want to just tweak
 the `Document` component supplied by the blueprint.
 
-`callback(err, reactElement)`
+`callback(err, reactElement, initialState)`
+
+- `reactElement` is the react element to be rendered
+- `initialState` is initial state from the server for data re-hydration
+  on the client.
 
 ##### `renderApp(props, callback)`
 
