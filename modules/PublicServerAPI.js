@@ -102,14 +102,15 @@ function sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats
   } else if (req.method !== 'GET') {
     sendNoRoutesMatched(res)
   } else {
-    renderApp(routerProps, (err, appElement) => {
+    renderApp(routerProps, (err, appElement, initialState = {}) => {
       const status = err ? err.status : (lastRoute.status || 200)
       const content = getContent(req, appElement)
       renderDocument({
         title: flushTitle(),
         content: content,
         scripts: getJavaScriptTags(webpackStats),
-        styles: getStyleTags(webpackStats)
+        styles: getStyleTags(webpackStats),
+        initialState
       }, (err, documentElement) => {
         if (err) {
           onError(err, req, res)
