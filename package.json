@@ -6,7 +6,6 @@
   "files": [
     "bin/react-project.js",
     "blueprint",
-    "blueprint_pkg.json",
     "lib",
     "index.js",
     "server.js",

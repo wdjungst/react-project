@@ -3,5 +3,4 @@
 require('shelljs/global')
 mv('blueprint/npmrc', 'blueprint/.npmrc')
 mv('blueprint/gitignore', 'blueprint/.gitignore')
-mv('blueprint_pkg.json', 'blueprint/package.json')
 
