@@ -18,7 +18,7 @@ export default function init(cb) {
     const blueprint = path.join(__dirname, '..', 'blueprint', '/')
 
     // release.sh moves blueprint/package.json to here
-    const blueprintPkg = require('../blueprint_package.json')
+    const blueprintPkg = require('../blueprint_pkg.json')
 
     cp('-R', blueprint, APP_PATH)
 

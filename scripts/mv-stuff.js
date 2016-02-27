@@ -8,5 +8,5 @@ mv('blueprint/.gitignore', 'blueprint/gitignore')
 
 // we don't want to actually copy this in the `init` task so we move it
 // before publishing
-mv('blueprint/package.json', 'blueprint_package.json')
+mv('blueprint/package.json', 'blueprint_pkg.json')
 
