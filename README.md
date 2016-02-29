@@ -204,11 +204,11 @@ loader][bundle-loader].
 import { lazy } from 'react-project'
 
 // bundle loader returns a function here that will load `Dashboard`
-// lazily, it won't be in the intial bundle
+// lazily, it won't be in the initial bundle
 import loadDashboard from 'bundle?lazy!./Dashboard'
 
 // now wrap that load function with `lazy` and you're done, you've got
-// super simple code splitting, the dashboad code won't be downloaded
+// super simple code splitting, the dashboard code won't be downloaded
 // until the user visits this route
 <Route getComponent={lazy(loadDashboard)}/>
 
@@ -229,7 +229,7 @@ Defines a route to only be available on the server. Add handlers
 routes. But only until somebody implements HMR for the server.
 
 You can nest routes to get path nesting, but only the final matched
-route's handler is called (maybe we could do somethign cool later with
+route's handler is called (maybe we could do something cool later with
 the handlers?!)
 
 ```js
@@ -308,7 +308,7 @@ npm scripts.
 
 #### `react-project init`
 
-Initializes the app, copies over a bluebrint app, updates package.json
+Initializes the app, copies over a blueprint app, updates package.json
 with tasks, etc.
 
 #### `react-project build`
