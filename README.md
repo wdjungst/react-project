@@ -13,6 +13,16 @@ Also, it has no tests. Also, it's awesome.
 
 
 
+
+## Node/NPM Versions
+
+I'm running node v5.7.0 and npm v3.6.0 as I tinker, there's no plan to
+support older versions at the moment.
+
+
+
+
+
 ## Contributing
 
 Please see [CONTRIBUTING.md](/CONTRIBUTING.md)
