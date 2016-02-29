@@ -1,0 +1,15 @@
+{
+  "name": "create-react-project",
+  "version": "0.0.8",
+  "description": "Create a React Project boilerplate.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./scripts/postinstall.js"
+  },
+  "author": "Ryan Florence",
+  "license": "ISC",
+  "dependencies": {
+    "shelljs": "0.6.0"
+  }
+}

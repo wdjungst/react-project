@@ -22,28 +22,16 @@ Please see [CONTRIBUTING.md](/CONTRIBUTING.md)
 
 ## Getting Started
 
-Don't clone this repo, it's not a boilerplate. Do this:
+The quickest way to get started is to use `create-react-project`.
 
 ```sh
-# don't like global npm installs, so you get to make the project
-mkdir best-app-of-your-life
-cd best-app-of-your-life
-npm init .
-# follow prompts
-
-# react project is a dependency, not a boilerplate, install it
-npm install react-project --save
-
-# You probably want a bit of boilerplate to get started though.
-# There isn't much here, it just connects the pieces that
-# react-project gives you
-node_modules/.bin/react-project init
-# follow prompts
-
-# and from now on you only deal with npm scripts
+npm install -g create-react-project
+create-react-project the-best-app-ever
+cd the-best-app-ever
 npm install
 npm start
 ```
+
 
 Now open [http://localhost:8080](http://localhost:8080).
 
@@ -65,6 +53,9 @@ NODE_ENV=production npm start
 Minified, gzipped, long-term hashed assets and server-pre-rendering, and
 more.
 
+You can use this as a dependency of an existing app. For now,
+the result of `create-react-project` is your best documentation on how
+to do that.
 
 
 

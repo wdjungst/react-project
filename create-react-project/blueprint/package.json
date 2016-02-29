@@ -1,6 +1,7 @@
 {
   "name": "react-project-app",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "react-project": {
     "server": "modules/server.js",
@@ -50,6 +51,7 @@
     "postcss-loader": "0.8.0",
     "react": "0.14.7",
     "react-dom": "0.14.7",
+    "react-project": "0.0.8",
     "react-router": "2.0.0",
     "react-title-component": "1.0.1",
     "source-map-support": "0.4.0",

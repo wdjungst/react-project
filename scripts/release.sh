@@ -30,20 +30,24 @@ next_ref="v$next_version"
 #npm test
 
 update_version 'package.json' $next_version
+update_version 'create-react-project/package.json' $next_version
 
 git commit -am "Version $next_version"
 
 # push first to make sure we're up-to-date
 git push origin master
-
 git tag $next_ref
 git tag latest -f
-
 git push origin $next_ref
 git push origin latest -f
 
+# publish this project
 npm run build
-
-./scripts/mv-stuff.js
 npm publish
-./scripts/mv-stuff-back.js
+
+# publish create-react-project
+cd create-react-project
+./actually-prepublish.js
+npm publish
+./postinstall.js
+

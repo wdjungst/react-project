@@ -1,5 +1,4 @@
 import { logTask, logError } from './LogUtils'
-import init from './init'
 import build from './build'
 import start from './start'
 
@@ -7,8 +6,7 @@ const action = process.argv[2]
 
 const actions = {
   start,
-  build,
-  init
+  build
 }
 
 if (actions[action]) {
