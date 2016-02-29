@@ -26,7 +26,6 @@ console.log('[react-project]')
 console.log('[react-project]', 'Now run:')
 console.log()
 console.log('cd', name)
-console.log('npm install')
 console.log('npm start')
 console.log()
 

@@ -13,3 +13,8 @@ mv(
   path.join('blueprint', 'npmrc')
 )
 
+mv(
+  path.join('blueprint', 'node_modules'),
+  path.join('blueprint', 'bundled_nms')
+)
+
