@@ -3,6 +3,9 @@
   "version": "0.0.9",
   "description": "Create a React Project boilerplate.",
   "main": "index.js",
+  "bin": {
+    "creact-react-project": "./index"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "./scripts/postinstall.js"
