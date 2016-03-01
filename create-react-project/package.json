@@ -4,7 +4,7 @@
   "description": "Create a React Project boilerplate.",
   "main": "index.js",
   "bin": {
-    "creact-react-project": "index.js"
+    "create-react-project": "index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -12,6 +12,10 @@ var bpPath = path.join(__dirname, 'blueprint')
 cp('-R', bpPath, appPath)
 
 // cp -R bug https://github.com/shelljs/shelljs/issues/140
+cp('-R',
+  path.join(bpPath, 'node_modules', '.bin'),
+  path.join(appPath, 'node_modules', '.bin')
+)
 ;[ '.babelrc', '.env', '.eslintrc', '.gitignore', '.npmrc' ].forEach(function (file) {
   cp(path.join(bpPath, file), path.join(appPath, file))
 })
