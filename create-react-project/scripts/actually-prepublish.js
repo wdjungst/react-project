@@ -18,3 +18,8 @@ mv(
   path.join('blueprint', 'bundled_nms')
 )
 
+mv(
+  path.join('blueprint', 'bundled_nms', '.bin'),
+  path.join('blueprint', 'bundled_nms', 'bin')
+)
+

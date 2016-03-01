@@ -14,6 +14,11 @@ mv(
 )
 
 mv(
+  path.join('blueprint', 'bundled_nms', 'bin'),
+  path.join('blueprint', 'bundled_nms', '.bin')
+)
+
+mv(
   path.join('blueprint', 'bundled_nms'),
   path.join('blueprint', 'node_modules')
 )
