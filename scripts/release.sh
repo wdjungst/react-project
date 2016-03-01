@@ -50,7 +50,7 @@ npm publish
 
 # publish create-react-project
 cd create-react-project
-./actually-prepublish.js
+./scripts/actually-prepublish.js
 npm publish
-./postinstall.js
+./scripts/postinstall.js
 
