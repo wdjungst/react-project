@@ -18,6 +18,11 @@ validate_semver() {
   fi
 }
 
+cd create-react-project/blueprint
+npm install
+cd ../..
+npm test
+
 current_version=$(node -p "require('./package').version")
 
 printf "Next version (current is $current_version)? "
@@ -26,8 +31,6 @@ read next_version
 validate_semver $next_version
 
 next_ref="v$next_version"
-
-#npm test
 
 update_version 'package.json' $next_version
 update_version 'create-react-project/package.json' $next_version

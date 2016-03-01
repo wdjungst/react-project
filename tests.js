@@ -2,12 +2,22 @@
 /*eslint no-console: 0*/
 import 'shelljs/global'
 import expect from 'expect'
+import { spawn } from 'child_process'
+import http from 'http'
 
-const TEST_DIR = '.tmp'
+const TEST_DIR = 'test-fixture'
+
+if (process.env.FAST) {
+  console.log('Detected FAST, skipping initialization of blueprint')
+} else {
+  console.log('Copying blueprint, this may take a while. Use FAST=1 to skip next time.')
+  rm('-rf', TEST_DIR)
+  exec(`create-react-project/index.js ${TEST_DIR}`)
+}
+
 
 describe('create-react-project', () => {
-  it('initializes a new project', () => {
-    exec('create-react-project/index.js', TEST_DIR)
+  it('initializes a new project', function () {
     cd(TEST_DIR)
     expect(ls('-A')).toEqual([
       '.babelrc',
@@ -28,7 +38,34 @@ describe('create-react-project', () => {
 
 describe('react-project', () => {
   describe('start', () => {
-    it('starts a web server')
+    it('starts a web server', function (done) {
+      this.timeout(100000)
+      cd(TEST_DIR)
+      const start = spawn('npm', [ 'start' ])
+      start.stdout.on('data', (data) => {
+        const str = data.toString()
+        console.log(str)
+        if (str.match(/webpack: bundle is now VALID/)) {
+          http.get('http://localhost:8080/?__ssr', (res) => {
+            console.log(`Got response: ${res.statusCode}`)
+            res.resume()
+            res.on('data', (chunk) => {
+              expect(chunk.toString()).toMatch(/DRAGON/)
+            })
+            res.on('end', () => {
+              console.log('No more data in response.')
+              start.kill('SIGINT') // <-- this doesn't actually kill it :(
+              done()
+            })
+          })
+        }
+      })
+      start.on('close', () => {
+        //done() // called in res.on('end'), but should be here
+        console.log('start closed')
+      })
+    })
+
     it('uses DEV_PORT')
     describe('with AUTO_RELOAD', () => {
       it('uses refresh')
