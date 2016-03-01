@@ -1,6 +1,6 @@
 {
   "name": "create-react-project",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Create a React Project boilerplate.",
   "main": "index.js",
   "bin": {
