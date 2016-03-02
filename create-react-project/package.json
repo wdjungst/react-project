@@ -3,6 +3,11 @@
   "version": "0.0.16",
   "description": "Create a React Project boilerplate.",
   "main": "index.js",
+  "files": [
+    "blueprint",
+    "index.js",
+    "README.md"
+  ],
   "bin": {
     "create-react-project": "index.js"
   },
