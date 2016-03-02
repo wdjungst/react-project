@@ -5,6 +5,7 @@
   "main": "index.js",
   "files": [
     "blueprint",
+    "scripts",
     "index.js",
     "README.md"
   ],
