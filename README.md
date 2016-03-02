@@ -35,11 +35,9 @@ Please see [CONTRIBUTING.md](/CONTRIBUTING.md)
 The quickest way to get started is to use `create-react-project`.
 
 ```sh
-mkdir some-app
-cd some-app
-npm init
-npm install react-project
-node_modules/.bin/react-project init
+npm install -g create-react-project
+create-react-project the-best-app-ever
+cd the-best-app-ever
 npm install
 npm start
 ```
@@ -64,6 +62,10 @@ NODE_ENV=production npm start
 
 Minified, gzipped, long-term hashed assets and server-pre-rendering, and
 more.
+
+You can use this as a dependency of an existing app. For now,
+the result of `create-react-project` is your best documentation on how
+to do that.
 
 
 
