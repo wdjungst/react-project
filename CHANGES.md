@@ -1,6 +1,14 @@
-## 0.0.7
+## 0.0.20
 
-- fix `start` to look for the right blueprint package.json
+- ignore `node_modules` regression fixed. Must faster initial bundle
+  times now.
+
+## 0.0.7 - 0.0.19
+
+- Lots of screwing around w/ the blueprint, weird npm things and other
+  stuff that eventually led to `create-react-project` global npm
+  install.  I don't like global installs either. You can remove it after
+  you've used it to create the blueprint.
 
 ## 0.0.6
 
