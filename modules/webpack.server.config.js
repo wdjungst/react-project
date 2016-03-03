@@ -43,7 +43,8 @@ export default {
   module: {
     loaders: SHARED.LOADERS.concat([
       { test: SHARED.JS_REGEX,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       { test: SHARED.CSS_REGEX,
         loader: `css-loader?${SHARED.CSS_LOADER_QUERY}!postcss-loader`

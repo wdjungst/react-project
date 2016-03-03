@@ -50,7 +50,7 @@ function getBabelLoader() {
   // we can't use the "dev" config in babelrc because we don't always
   // want it, sometimes we want refresh, sometimes we want none. Also, we
   // don't want it in the server bundle either (not yet anyway?)
-  const loader = { test: SHARED.JS_REGEX, loader: 'babel-loader' }
+  const loader = { test: SHARED.JS_REGEX, exclude: /node_modules/, loader: 'babel-loader' }
   if (HOT) {
     const rc = JSON.parse(fs.readFileSync(path.join(SHARED.APP_PATH, '.babelrc')))
     loader.query = { presets: rc.presets.concat([ 'react-hmre' ]) }
