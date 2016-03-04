@@ -182,6 +182,9 @@ PORT=8080
 # webpack dev server port
 DEV_PORT=8081
 
+# webpack dev server host
+DEV_HOST=localhost
+
 # where to find assets, point to a CDN on production box
 PUBLIC_PATH=/
 
