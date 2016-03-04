@@ -5,7 +5,7 @@
   "main": "index.js",
   "files": [
     "bin/react-project.js",
-    "blueprint",
+    "create-react-project/blueprint/package.json",
     "lib",
     "index.js",
     "server.js",
