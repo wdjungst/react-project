@@ -231,7 +231,7 @@ routes. But only until somebody implements HMR for the server.
 
 You can nest routes to get path nesting, but only the final matched
 route's handler is called (maybe we could do something cool later with
-the handlers?!)
+the handlers?)
 
 ```js
 import { ServerRoute } from 'react-project/server'
@@ -259,14 +259,25 @@ export default (
 )
 ```
 
+#### `serverRouteHandler(req, res, { params, location, route })`
+
+- `req` an express request object
+- `res` an express resonponse object
+- `params` the url parameters
+- `location` the matched location
+- `route` the matched server route
+
 
 ### `react-project/server`
 
-#### `createServer({ renderDocument, renderApp, routes })`
+#### `createServer(getApp)`
 
 ```
 import { createServer } from 'react-project/server'
-createServer({ renderDocument, renderApp, routes }).start()
+
+createServer((req, res, cb) => {
+  cb(null, { renderDocument, renderApp, routes })
+}).start()
 ```
 
 Creates and returns a new [Express][express] server, with a new

@@ -16,7 +16,7 @@ export default (
       <Route path="dragon" getComponent={lazy(loadDragon)}/>
     </Route>
     <ServerRoute path="/api">
-      <ServerRoute path="hello" get={hello}/>
+      <ServerRoute path=":hello" get={hello}/>
     </ServerRoute>
     <Redirect from="/not-dragon" to="/dragon"/>
     <Route path="*" status={404} component={NoMatch}/>

@@ -1,3 +1,8 @@
+## 0.0.21
+
+- BREAKING: `createServer` API now allows for request specific setup
+- BREAKING: `serverRouteHandler` API gets params and location
+
 ## 0.0.20
 
 - ignore `node_modules` regression fixed. Must faster initial bundle

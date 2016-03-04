@@ -10,14 +10,12 @@ function renderDocument(props, cb) {
 }
 
 function renderApp(props, cb) {
-  const use404 = props.location.pathname === '/throws-an-error'
-  const err = use404 ? { status: 404 } : null
-  cb(err, <RouterContext {...props}/>)
+  cb(null, <RouterContext {...props}/>)
 }
 
-createServer({
-  renderDocument,
-  renderApp,
-  routes
-}).start()
+function getApp(req, res, cb) {
+  cb(null, { renderDocument, routes, renderApp })
+}
+
+createServer(getApp).start()
 
