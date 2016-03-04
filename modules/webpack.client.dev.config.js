@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import * as SHARED from './webpack.shared.config'
 import * as SHARED_CLIENT from './webpack.shared.client.config'
-import { DEV_PORT } from './Constants'
+import { DEV_PORT, DEV_HOST } from './Constants'
 
 const HOT = process.env.AUTO_RELOAD === 'hot'
 const REFRESH = process.env.AUTO_RELOAD === 'refresh'
@@ -17,7 +17,7 @@ export default {
   output: {
     path: SHARED_CLIENT.BUILD_PATH,
     filename: '[name].js',
-    publicPath: `http://localhost:${DEV_PORT}/`
+    publicPath: `http://${DEV_HOST}:${DEV_PORT}/`
   },
 
   module: {
@@ -69,7 +69,7 @@ function getEntry() {
   }
   if (HOT || REFRESH) {
     entry._vendor.unshift(
-      `webpack-dev-server/client?http://localhost:${DEV_PORT}`
+      `webpack-dev-server/client?http://${DEV_HOST}:${DEV_PORT}`
     )
   }
   return entry
