@@ -11,6 +11,11 @@ update_version() {
   echo "Updated ${1} version to ${2}"
 }
 
+update_dep() {
+  echo "$(node -p "p=require('./${1}');p.dependencies['react-project']='${2}';JSON.stringify(p,null,2)")" > $1
+  echo "Updated ${1} dependency to version to ${2}"
+}
+
 validate_semver() {
   if ! [[ $1 =~ ^[0-9]\.[0-9]+\.[0-9](-.+)? ]]; then
     echo >&2 "Version $1 is not valid! It must be a valid semver string like 1.0.2 or 2.3.0-beta.1"
@@ -19,6 +24,7 @@ validate_semver() {
 }
 
 cd create-react-project/blueprint
+npm unlink react-project
 npm install
 cd ../..
 npm test
@@ -34,6 +40,7 @@ next_ref="v$next_version"
 
 update_version 'package.json' $next_version
 update_version 'create-react-project/package.json' $next_version
+update_dep 'create-react-project/blueprint/package.json' $next_version
 
 git commit -am "Version $next_version"
 
