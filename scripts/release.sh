@@ -24,7 +24,6 @@ validate_semver() {
 }
 
 cd create-react-project/blueprint
-npm unlink react-project
 npm install
 cd ../..
 npm test

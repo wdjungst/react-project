@@ -13,8 +13,11 @@ if (process.env.FAST) {
   console.log('Copying blueprint, this may take a while. Use FAST=1 to skip next time.')
   rm('-rf', TEST_DIR)
   exec(`create-react-project/index.js ${TEST_DIR}`)
+  exec('npm link')
+  cd(TEST_DIR)
+  exec('npm link react-project')
+  exec('npm install')
 }
-
 
 describe('create-react-project', () => {
   it('initializes a new project', function () {
