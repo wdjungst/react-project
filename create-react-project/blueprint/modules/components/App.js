@@ -7,7 +7,7 @@ export default React.createClass({
     return (
       <div>
         <Title render="Awesome App"/>
-        <h1>Welcome to your app.</h1>
+        <h1>Velcome to your app.</h1>
         <ul>
           <li><IndexLink to="/">Home</IndexLink></li>
           <li><Link to="/dragon">A DRAGON!</Link></li>

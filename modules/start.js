@@ -1,14 +1,16 @@
-import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import build from './build'
-import { log, logError, promptApproval } from './LogUtils'
+import { log, logError } from './LogUtils'
 import { getPackageJSON, getDXConfig } from './PackageUtils'
-import { DEV_PORT, DEV_HOST, APP_PATH } from './Constants'
+import { DEV_PORT, DEV_HOST, APP_PATH, SERVER_RENDERING, AUTO_RELOAD } from './Constants'
+
+const PROD = process.env.NODE_ENV === 'production'
 
 export default function start(cb) {
-  if (process.env.NODE_ENV === 'production') {
+  validateEnv()
+  if (PROD) {
     logDXStartWarning()
   } else {
     checkDependencies()
@@ -17,6 +19,12 @@ export default function start(cb) {
       require(appServerPath)
       runDevServer(cb)
     })
+  }
+}
+
+function validateEnv() {
+  if (!PROD && AUTO_RELOAD === 'hot' && SERVER_RENDERING) {
+    logError('Hot Module Replacement is disabled because SERVER_RENDERING is enabled.')
   }
 }
 

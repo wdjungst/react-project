@@ -2,7 +2,7 @@ import webpack from 'webpack'
 import fs from 'fs'
 import path from 'path'
 import * as SHARED from './webpack.shared.config'
-import { DEV_PORT, DEV_HOST, PUBLIC_PATH } from './Constants'
+import { DEV_PORT, DEV_HOST, PUBLIC_PATH, SERVER_RENDERING } from './Constants'
 import { getDXConfig } from './PackageUtils'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
@@ -50,6 +50,7 @@ export default {
 
 }
 
+
 function getLoaders() {
   return [
     getBabelLoader(),
@@ -60,6 +61,9 @@ function getLoaders() {
     { test: SHARED.FONT_REGEX,
       loader: 'url-loader?limit=10000'
     },
+    { test: SHARED.IMAGE_REGEX,
+      loader: 'url-loader?limit=10000'
+    },
     { test: /modules\/api\//,
       loader: 'null-loader'
     }
@@ -68,7 +72,7 @@ function getLoaders() {
 
 function getCSSLoader() {
   const loader = { test: SHARED.CSS_REGEX }
-  if (PROD) {
+  if (PROD || SERVER_RENDERING) {
     loader.loader = ExtractTextPlugin.extract(
       'style-loader',
       `css-loader?${SHARED.CSS_LOADER_QUERY}!postcss-loader`
@@ -123,9 +127,10 @@ function getEntry() {
   }
 }
 
-
 function getPlugins() {
-  const plugins = [ new webpack.optimize.CommonsChunkPlugin('_vendor', 'vendor.js') ]
+  const plugins = [
+    new webpack.optimize.CommonsChunkPlugin('_vendor', 'vendor.js')
+  ]
 
   if (PROD) {
     plugins.push(
@@ -140,16 +145,14 @@ function getPlugins() {
         window.__reactProjectDebugRan__ = true
         console.debug('[react-project] NODE_ENV=${process.env.NODE_ENV}');
         console.debug('[react-project] AUTO_RELOAD=${process.env.AUTO_RELOAD}');
-        if (!location.search.match(/__ssr/)) {
-           console.debug(
-             '[react-project] SSR disabled in dev. Enable with',
-             location.search ? location.href + '&__ssr' : location.href + '?__ssr'
-           );
-        }
+        console.debug('[react-project] SERVER_RENDERING=${SERVER_RENDERING}');
       }
     `
     plugins.push(new webpack.BannerPlugin(devBannerScript, { raw: true, entryOnly: true }))
-    if (HOT) {
+    if (SERVER_RENDERING) {
+      plugins.push(new ExtractTextPlugin(`styles.[name].css`))
+    } else if (HOT) {
+      // can't do HMR with SERVER_RENDERING because of ExtractTextPlugin
       plugins.push(new webpack.HotModuleReplacementPlugin())
     }
   }

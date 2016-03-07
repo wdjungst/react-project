@@ -22,29 +22,34 @@ only test what the user would do.
 
 ## Hacking
 
+It's sort of a pain, I'm open to better ideas, but here's my workflow:
+
+In one terminal tab I have at React project and then watch for changes,
+but with a few npm link shenanigans first:
+
 ```sh
-# in the root of your repo fork
+cd /path/to/react-project
 npm link
-cd blueprint
-npm install
-# go to bed
-# wake up
-npm link react-project
 npm start
 ```
 
-Now it's running. Making changes to the blueprint are lovely and reload
-right away, but if you make changes to any server code it's a giant
-pain, please help, but anyway you need to:
+Then in another tab I run the blueprint with some npm link shenanigans
+again.
 
 ```sh
-# quit the server with ^C
-# get back to the root of the repo
-cd ..
-npm run build
-cd blueprint
+cd /path/to/react-project/create-react-project/blueprint
+npm install
+npm link react-project
+npm install
 npm start
 ```
 
-If we had server hot-reloading this would be way better.
+Now it's running. Making changes to the blueprint UI is lovely and
+reload right away, but if you make changes to any server or webpack code
+you have to restart the server, which is most of the time:
+
+```sh
+^C
+npm start
+```
 

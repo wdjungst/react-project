@@ -1,4 +1,4 @@
-import '../modules/styles.css'
+//import '../modules/styles.css'
 import React from 'react'
 import { Route, IndexRoute, Redirect } from 'react-router'
 import { ServerRoute, lazy } from 'react-project'

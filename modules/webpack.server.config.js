@@ -2,8 +2,14 @@ import webpack from 'webpack'
 import fs from 'fs'
 import path from 'path'
 import * as SHARED from './webpack.shared.config'
+import { DEV_PORT, DEV_HOST, PUBLIC_PATH } from './Constants'
 import { getDXConfig } from './PackageUtils'
 
+const PROD = process.env.NODE_ENV === 'production'
+
+function getPublicPath() {
+  return PROD ? PUBLIC_PATH : `http://${DEV_HOST}:${DEV_PORT}/`
+}
 
 const nodeModules = fs.readdirSync(
   path.join(SHARED.APP_PATH, 'node_modules')
@@ -21,7 +27,8 @@ export default {
 
   output: {
     path: path.join(SHARED.APP_PATH, '.build'),
-    filename: 'server.js'
+    filename: 'server.js',
+    publicPath: getPublicPath()
   },
 
   externals: getExternals(),
@@ -47,7 +54,7 @@ export default {
         exclude: /node_modules/
       },
       { test: SHARED.CSS_REGEX,
-        loader: `css-loader?${SHARED.CSS_LOADER_QUERY}!postcss-loader`
+        loader: `css-loader/locals?${SHARED.CSS_LOADER_QUERY}!postcss-loader`
       }
     ]
   },
@@ -69,7 +76,12 @@ function getExternals() {
   return [
     function (context, request, callback) {
       const pathStart = request.split('/')[0]
-      if (nodeModules.indexOf(pathStart) >= 0) {
+      // can't remember why we need to bundle up react-project stuff ...
+      if (
+        nodeModules.indexOf(pathStart) >= 0 &&
+        request !== 'react-project' &&
+        request !== 'react-project/server'
+      ) {
         callback(null, 'commonjs ' + request)
       } else {
         callback()

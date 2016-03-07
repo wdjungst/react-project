@@ -24,8 +24,10 @@ import compression from 'compression'
 import hpp from 'hpp'
 import helmet from 'helmet'
 import { log } from './LogUtils'
-import { PORT, APP_PATH, PUBLIC_DIR } from './Constants'
+import { PORT, APP_PATH, PUBLIC_DIR, SERVER_RENDERING } from './Constants'
 import ErrorMessage from './ErrorMessage'
+
+const PROD = process.env.NODE_ENV === 'production'
 
 export function createServer(getApp) {
   const server = express()
@@ -72,7 +74,7 @@ export function createServer(getApp) {
 }
 
 function addProductionOnlyMiddleware(server) {
-  if (process.env.NODE_ENV === 'production') {
+  if (PROD) {
     server.use(compression())
     server.use(express.static(PUBLIC_DIR))
   }
@@ -167,7 +169,7 @@ function getWebpackStats() {
 }
 
 function getContent(req, appElement) {
-  return (process.env.NODE_ENV === 'production' || req.query.__ssr != null) ?
+  return (PROD || SERVER_RENDERING) ?
     renderToString(appElement) : ''
 }
 
