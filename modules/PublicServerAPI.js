@@ -40,7 +40,7 @@ export function createServer(getApp) {
 
   server.start = () => {
     server.all('*', (req, res) => {
-      getApp(req, res, (err, { renderDocument, renderApp, routes }) => {
+      getApp(req, res, (err, { render, routes }) => {
         if (err) {
           onError(err, req, res)
         } else {
@@ -52,7 +52,7 @@ export function createServer(getApp) {
               // will need to make changes in React Router or history probably
               res.redirect(redirect.pathname + redirect.search)
             } else if (routerProps) {
-              sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats, routerProps })
+              sendWithReactRouter({ req, res, render, webpackStats, routerProps })
             } else {
               sendNoRoutesMatched(res)
             }
@@ -99,7 +99,7 @@ function addMiddleware(server) {
   server.use(helmet.noSniff())
 }
 
-function sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats, routerProps }) {
+function sendWithReactRouter({ req, res, render, webpackStats, routerProps }) {
   const { routes } = routerProps
   const lastRoute = routes[routes.length - 1]
   if (lastRoute.isServerRoute) {
@@ -112,23 +112,22 @@ function sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats
   } else if (req.method !== 'GET') {
     sendNoRoutesMatched(res)
   } else {
-    renderApp(routerProps, (err, appElement, initialState = {}) => {
-      const status = err ? err.status : (lastRoute.status || 200)
-      const content = getContent(req, appElement)
-      renderDocument({
-        title: flushTitle(),
-        content: content,
-        scripts: getJavaScriptTags(webpackStats),
-        styles: getStyleTags(webpackStats),
-        initialState
-      }, (err, documentElement) => {
-        if (err) {
-          onError(err, req, res)
-        } else {
-          const markup = renderToStaticMarkup(documentElement)
-          res.status(status).send(`<!doctype html>\n${markup}`)
-        }
-      })
+    render(routerProps, (err, { renderDocument, renderApp }) => {
+      if (err) {
+        onError(err, req, res)
+      } else {
+        const status = err ? err.status : (lastRoute.status || 200)
+        const appElement = renderApp(routerProps)
+        const content = getContent(req, appElement)
+        const documentElement = renderDocument({
+          title: flushTitle(),
+          content: content,
+          scripts: getJavaScriptTags(webpackStats),
+          styles: getStyleTags(webpackStats)
+        })
+        const markup = renderToStaticMarkup(documentElement)
+        res.status(status).send(`<!doctype html>\n${markup}`)
+      }
     })
   }
 }

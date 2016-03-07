@@ -1,3 +1,12 @@
+## 0.0.22
+
+- BREAKING: `createServer` now takes just a `render` method, not
+  `renderApp` and `renderDocument`, and then you callback from render
+  with those. See the blueprint `server.js`. This allows for custom data
+  loading abstractions (like AsyncProps) that need the props from
+  React Router `match` and then sends the data to both the `<Document/>`
+  (for data hand-off) and the `<App/>`.
+
 ## 0.0.21
 
 - BREAKING: `createServer` API now allows for request specific setup
