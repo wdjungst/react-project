@@ -103,7 +103,7 @@ function sendWithReactRouter({ req, res, renderApp, renderDocument, webpackStats
   const { routes } = routerProps
   const lastRoute = routes[routes.length - 1]
   if (lastRoute.isServerRoute) {
-    handleServerRoute(req, res, {
+    handleServerRoute(req, res, lastRoute, {
       params: routerProps.params,
       location: routerProps.location,
       routes: routerProps.routes,
