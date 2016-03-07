@@ -42,7 +42,6 @@ function checkDependencies() {
       log(`You have: ${dep.pkgVersion} and I expect ${dep.blueprintVersion}`)
     })
     log('You might want to `npm install` the versions I expect.')
-    promptApproval('Would you like me continue?')
   }
 
   if (missingDeps.length) {
