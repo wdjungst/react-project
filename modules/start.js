@@ -66,9 +66,9 @@ function logDXStartWarning() {
 
 function runDevServer(cb) {
   const configPath = path.join(APP_PATH, getDXConfig().webpack)
-  const { ClientDevConfig } = require(configPath)
-  const compiler = webpack(ClientDevConfig)
-  const server = new WebpackDevServer(compiler, ClientDevConfig.devServer)
+  const { ClientConfig } = require(configPath)
+  const compiler = webpack(ClientConfig)
+  const server = new WebpackDevServer(compiler, ClientConfig.devServer)
   server.listen(DEV_PORT, DEV_HOST, () => {
     log('Webpack dev server listening on port', DEV_PORT)
     cb()

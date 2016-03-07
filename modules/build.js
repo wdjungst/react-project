@@ -10,22 +10,8 @@ import ProgressPlugin from 'webpack/lib/ProgressPlugin'
 export default function build(cb) {
   log(`NODE_ENV=${process.env.NODE_ENV}`)
   validateEnv()
-  if (process.env.NODE_ENV === 'production') {
-    buildProduction(cb)
-  } else {
-    buildDev(cb)
-  }
-}
-
-function buildDev(cb) {
   bundleServer(() => {
-    bundleClientDev(cb)
-  })
-}
-
-function buildProduction(cb) {
-  bundleServer(() => {
-    bundleClientProd(cb)
+    bundleClient(cb)
   })
 }
 
@@ -43,14 +29,9 @@ function getAppWebpackConfig() {
   return require(path.join(APP_PATH, getDXConfig().webpack))
 }
 
-function bundleClientDev(cb) {
-  log('bundling client dev')
-  bundle(getAppWebpackConfig().ClientDevConfig, { saveStats: true }, cb)
-}
-
-function bundleClientProd(cb) {
-  log('bundling client prod')
-  bundle(getAppWebpackConfig().ClientProdConfig, { saveStats: true }, cb)
+function bundleClient(cb) {
+  log('bundling client')
+  bundle(getAppWebpackConfig().ClientConfig, { saveStats: true }, cb)
 }
 
 function bundleServer(cb) {
