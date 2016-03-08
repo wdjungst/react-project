@@ -169,7 +169,7 @@ function getWebpackStats() {
 }
 
 function getContent(req, appElement) {
-  return (PROD || SERVER_RENDERING) ?
+  return (SERVER_RENDERING) ?
     renderToString(appElement) : ''
 }
 

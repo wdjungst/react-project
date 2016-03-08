@@ -173,23 +173,41 @@ or take full control.
 
 ### ENV vars
 
+React Project will use environment variables to know how to build for
+production v. development.  For local development, you can edit the
+`.env` file to change environment variables, in production you'll want
+to set them on the box.
+
+#### Typical Production Environment variables
+
 ```
-NODE_ENV=development
+NODE_ENV=production
+PORT=80
+PUBLIC_PATH=/ # or a cdn you push your assets to
+SERVER_RENDERING=on
+```
 
-# web server port
-PORT=8080
+When `npm start` is called on a machine with those environment
+variables, your app will be optimized with things like gzip compression.
 
-# webpack dev server port
-DEV_PORT=8081
+#### Development environment variables
 
-# webpack dev server host
+```
+# the host webpack assets are served from
 DEV_HOST=localhost
 
-# where to find assets, point to a CDN on production box
-PUBLIC_PATH=/
+# the port webpack assets are served from
+DEV_PORT=8081
 
-# "hot", "refresh", and "none"
+# reload the browser on app changes
 AUTO_RELOAD=refresh
+
+# "hot" reload changed modules only (no page reload), careful, this
+# thing can be finicky
+AUTO_RELOAD=hot
+
+# don't reload anything on code changes
+AUTO_RELOAD=none
 ```
 
 
