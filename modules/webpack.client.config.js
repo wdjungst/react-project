@@ -129,18 +129,6 @@ function getPlugins() {
     new webpack.optimize.CommonsChunkPlugin('_vendor', 'vendor.js')
   ]
 
-  //if (!PROD) {
-    //const devBannerScript = `
-      //if (!window.__reactProjectDebugRan__) {
-        //window.__reactProjectDebugRan__ = true
-        //console.debug('[react-project] NODE_ENV=${process.env.NODE_ENV}');
-        //console.debug('[react-project] AUTO_RELOAD=${process.env.AUTO_RELOAD}');
-        //console.debug('[react-project] SERVER_RENDERING=${SERVER_RENDERING}');
-      //}
-    //`
-    //plugins.push(new webpack.BannerPlugin(devBannerScript, { raw: true, entryOnly: true }))
-  //}
-
   if (PROD) {
     plugins.push(
       new ExtractTextPlugin(`${HASH8}.css`),
