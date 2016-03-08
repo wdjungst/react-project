@@ -1,4 +1,5 @@
 import React from 'react'
+import favicon from '../favicon.ico'
 
 const { arrayOf, string, node, object } = React.PropTypes
 
@@ -25,6 +26,7 @@ const Document = React.createClass({
       <html>
         <head>
           <meta charSet="utf-8"/>
+          <link rel="shortcut icon" href={favicon}/>
           <title>{title}</title>
           {styles}
         </head>
