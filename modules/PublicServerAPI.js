@@ -15,6 +15,7 @@
 import fs from 'fs'
 import express from 'express'
 import bodyParser from 'body-parser'
+import morgan from 'morgan'
 import React from 'react'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import path from 'path'
@@ -39,7 +40,6 @@ export function createServer(getApp) {
   }
 
   server.start = () => {
-    addProductionOnlyMiddleware(server)
     addMiddleware(server)
     server.all('*', (req, res) => {
       getApp(req, res, (err, { render, routes }) => {
@@ -75,12 +75,18 @@ export function createServer(getApp) {
 
 function addProductionOnlyMiddleware(server) {
   if (PROD) {
-    server.use(compression())
-    server.use(express.static(PUBLIC_DIR))
   }
 }
 
 function addMiddleware(server) {
+  if (process.env.NODE_ENV === 'production') {
+    server.use(morgan('combined'))
+    server.use(compression())
+    server.use(express.static(PUBLIC_DIR))
+  } else {
+    server.use(morgan('dev'))
+  }
+
   server.use(express.static(path.join(APP_PATH, 'static')))
   server.use(bodyParser.json())
   server.use(hpp())

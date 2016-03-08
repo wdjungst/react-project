@@ -6,7 +6,6 @@ import morgan from 'morgan'
 import Document from '../modules/components/Document'
 import routes from '../modules/routes'
 
-
 function getApp(req, res, requestCallback) {
   // here is your chance to do things like get an auth token and generate
   // your route config w/ request aware `onEnter` hooks, etc.
@@ -23,15 +22,5 @@ function getApp(req, res, requestCallback) {
   })
 }
 
-const server = createServer(getApp)
-
-if (process.env.NODE_ENV === 'development') {
-  server.use(morgan('dev'))
-}
-
-if (process.env.NODE_ENV === 'production') {
-  server.use(morgan('combined'))
-}
-
-server.start()
+createServer(getApp).start()
 
