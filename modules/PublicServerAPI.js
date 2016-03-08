@@ -33,14 +33,14 @@ export function createServer(getApp) {
   const server = express()
   const webpackStats = getWebpackStats()
   server.disable('x-powered-by')
-  addProductionOnlyMiddleware(server)
-  addMiddleware(server)
   server._listen = server.listen
   server.listen = () => {
     throw new Error('[react-project]', 'Do not call `server.listen()`, use `server.start()`')
   }
 
   server.start = () => {
+    addProductionOnlyMiddleware(server)
+    addMiddleware(server)
     server.all('*', (req, res) => {
       getApp(req, res, (err, { render, routes }) => {
         if (err) {
