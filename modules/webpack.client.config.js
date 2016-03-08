@@ -6,9 +6,10 @@ import { DEV_PORT, DEV_HOST, PUBLIC_PATH, SERVER_RENDERING } from './Constants'
 import { getDXConfig } from './PackageUtils'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
-const HOT = process.env.AUTO_RELOAD === 'hot'
 const REFRESH = process.env.AUTO_RELOAD === 'refresh'
 const PROD = process.env.NODE_ENV === 'production'
+// can't do HMR with SERVER_RENDERING because of ExtractTextPlugin
+const HOT = !PROD && !SERVER_RENDERING && process.env.AUTO_RELOAD === 'hot'
 const HASH8 = '[hash:8]'
 
 function getPublicPath() {
@@ -98,7 +99,7 @@ function getBabelLoader() {
     exclude: /node_modules/,
     loader: 'babel-loader'
   }
-  if (!PROD && HOT) {
+  if (HOT) {
     const rc = JSON.parse(fs.readFileSync(path.join(SHARED.APP_PATH, '.babelrc')))
     loader.query = { presets: rc.presets.concat([ 'react-hmre' ]) }
   }
@@ -140,7 +141,6 @@ function getPlugins() {
     if (SERVER_RENDERING) {
       plugins.push(new ExtractTextPlugin('[name].css'))
     } else if (HOT) {
-      // can't do HMR with SERVER_RENDERING because of ExtractTextPlugin
       plugins.push(new webpack.HotModuleReplacementPlugin())
     }
   }
