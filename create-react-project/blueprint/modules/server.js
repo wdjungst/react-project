@@ -1,8 +1,6 @@
-/*eslint no-console:0*/
 import React from 'react'
 import { createServer } from 'react-project/server'
 import { RouterContext } from 'react-router'
-import morgan from 'morgan'
 import Document from '../modules/components/Document'
 import routes from '../modules/routes'
 
