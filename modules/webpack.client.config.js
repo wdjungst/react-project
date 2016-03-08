@@ -17,9 +17,9 @@ function getPublicPath() {
 
 export default {
 
-  devtool: getDevTool(),
-
   entry: getEntry(),
+
+  devtool: getDevTool(),
 
   output: {
     path: path.join(SHARED.APP_PATH, '.build'),
@@ -47,9 +47,7 @@ export default {
       chunkModules: true
     }
   }
-
 }
-
 
 function getLoaders() {
   return [
@@ -84,7 +82,7 @@ function getCSSLoader() {
 }
 
 function getFileName() {
-  return PROD ? HASH8 : '[name].js'
+  return PROD ? `${HASH8}.js` : '[name].js'
 }
 
 function getDevTool() {
@@ -112,9 +110,7 @@ function getEntry() {
     app: path.join(SHARED.APP_PATH, getDXConfig().client),
     _vendor: [ 'react', 'react-dom', 'react-router', 'react-project' ]
   }
-  if (PROD) {
-    return entry
-  } else {
+  if (!PROD) {
     if (HOT) {
       entry._vendor.unshift('webpack/hot/dev-server')
     }
@@ -123,34 +119,38 @@ function getEntry() {
         `webpack-dev-server/client?http://${DEV_HOST}:${DEV_PORT}`
       )
     }
-    return entry
   }
+  return entry
 }
 
 function getPlugins() {
+
   const plugins = [
     new webpack.optimize.CommonsChunkPlugin('_vendor', 'vendor.js')
   ]
 
+  //if (!PROD) {
+    //const devBannerScript = `
+      //if (!window.__reactProjectDebugRan__) {
+        //window.__reactProjectDebugRan__ = true
+        //console.debug('[react-project] NODE_ENV=${process.env.NODE_ENV}');
+        //console.debug('[react-project] AUTO_RELOAD=${process.env.AUTO_RELOAD}');
+        //console.debug('[react-project] SERVER_RENDERING=${SERVER_RENDERING}');
+      //}
+    //`
+    //plugins.push(new webpack.BannerPlugin(devBannerScript, { raw: true, entryOnly: true }))
+  //}
+
   if (PROD) {
     plugins.push(
-      new ExtractTextPlugin(`styles.${HASH8}.css`),
+      new ExtractTextPlugin(`${HASH8}.css`),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin()
     )
   } else {
-    const devBannerScript = `
-      if (!window.__reactProjectDebugRan__) {
-        window.__reactProjectDebugRan__ = true
-        console.debug('[react-project] NODE_ENV=${process.env.NODE_ENV}');
-        console.debug('[react-project] AUTO_RELOAD=${process.env.AUTO_RELOAD}');
-        console.debug('[react-project] SERVER_RENDERING=${SERVER_RENDERING}');
-      }
-    `
-    plugins.push(new webpack.BannerPlugin(devBannerScript, { raw: true, entryOnly: true }))
     if (SERVER_RENDERING) {
-      plugins.push(new ExtractTextPlugin(`styles.[name].css`))
+      plugins.push(new ExtractTextPlugin('[name].css'))
     } else if (HOT) {
       // can't do HMR with SERVER_RENDERING because of ExtractTextPlugin
       plugins.push(new webpack.HotModuleReplacementPlugin())
