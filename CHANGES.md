@@ -1,3 +1,7 @@
+## 0.0.24
+
+- Fixed server route regression
+
 ## 0.0.23
 
 - BREAKING: `createServer` now takes just a `render` method, not
