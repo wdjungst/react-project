@@ -28,8 +28,6 @@ import { log } from './LogUtils'
 import { PORT, APP_PATH, PUBLIC_DIR, SERVER_RENDERING } from './Constants'
 import ErrorMessage from './ErrorMessage'
 
-const PROD = process.env.NODE_ENV === 'production'
-
 export function createServer(getApp) {
   const server = express()
   const webpackStats = getWebpackStats()
@@ -73,16 +71,11 @@ export function createServer(getApp) {
   return server
 }
 
-function addProductionOnlyMiddleware(server) {
-  if (PROD) {
-  }
-}
-
 function addMiddleware(server) {
   if (process.env.NODE_ENV === 'production') {
     server.use(morgan('combined'))
     server.use(compression())
-    server.use(express.static(PUBLIC_DIR))
+    server.use(express.static(PUBLIC_DIR, { maxAge: 31536000 }))
   } else {
     server.use(morgan('dev'))
   }

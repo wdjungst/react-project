@@ -10,7 +10,7 @@ const REFRESH = process.env.AUTO_RELOAD === 'refresh'
 const PROD = process.env.NODE_ENV === 'production'
 // can't do HMR with SERVER_RENDERING because of ExtractTextPlugin
 const HOT = !PROD && !SERVER_RENDERING && process.env.AUTO_RELOAD === 'hot'
-const HASH8 = '[hash:8]'
+const HASH = '[chunkHash]'
 
 function getPublicPath() {
   return PROD ? PUBLIC_PATH : `http://${DEV_HOST}:${DEV_PORT}/`
@@ -83,7 +83,7 @@ function getCSSLoader() {
 }
 
 function getFileName() {
-  return PROD ? `${HASH8}.js` : '[name].js'
+  return PROD ? `${HASH}.js` : '[name].js'
 }
 
 function getDevTool() {
@@ -127,12 +127,12 @@ function getEntry() {
 function getPlugins() {
 
   const plugins = [
-    new webpack.optimize.CommonsChunkPlugin('_vendor', 'vendor.js')
+    new webpack.optimize.CommonsChunkPlugin('_vendor', PROD ? `vendor-${HASH}.js` : 'vendor.js')
   ]
 
   if (PROD) {
     plugins.push(
-      new ExtractTextPlugin(`${HASH8}.css`),
+      new ExtractTextPlugin(`${HASH}.css`),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin()

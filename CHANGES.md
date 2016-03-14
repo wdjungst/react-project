@@ -1,3 +1,7 @@
+## 0.0.25
+
+- Better long term caching
+
 ## 0.0.24
 
 - Fixed server route regression
