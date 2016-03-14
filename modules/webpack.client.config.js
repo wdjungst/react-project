@@ -127,6 +127,9 @@ function getEntry() {
 function getPlugins() {
 
   const plugins = [
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV) }
+    }),
     new webpack.optimize.CommonsChunkPlugin('_vendor', PROD ? `vendor-${HASH}.js` : 'vendor.js')
   ]
 

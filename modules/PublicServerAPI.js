@@ -75,7 +75,7 @@ function addMiddleware(server) {
   if (process.env.NODE_ENV === 'production') {
     server.use(morgan('combined'))
     server.use(compression())
-    server.use(express.static(PUBLIC_DIR, { maxAge: 31536000 }))
+    server.use(express.static(PUBLIC_DIR, { maxAge: 31536000000 }))
   } else {
     server.use(morgan('dev'))
   }

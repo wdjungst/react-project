@@ -1,3 +1,8 @@
+## 0.0.26
+
+- Fixed long-term caching (milliseconds, not seconds, ofc)
+- Fixed production react build with `NODE_ENV`
+
 ## 0.0.25
 
 - Better long term caching
