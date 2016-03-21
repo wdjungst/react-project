@@ -1,3 +1,7 @@
+## 0.0.27
+
+- Fixed npm test
+
 ## 0.0.26
 
 - Fixed long-term caching (milliseconds, not seconds, ofc)
