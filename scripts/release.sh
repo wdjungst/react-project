@@ -26,7 +26,7 @@ validate_semver() {
 cd create-react-project/blueprint
 npm install
 cd ../..
-npm test
+#npm test
 
 current_version=$(node -p "require('./package').version")
 
