@@ -1,2 +1,2 @@
-module.exports = require('react-project/webpack')
+export * from 'react-project/webpack'
 

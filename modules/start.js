@@ -3,10 +3,17 @@ import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import build from './build'
 import { log, logError } from './LogUtils'
-import { getPackageJSON, getDXConfig } from './PackageUtils'
-import { DEV_PORT, DEV_HOST, APP_PATH, SERVER_RENDERING, AUTO_RELOAD } from './Constants'
+import { getPackageJSON } from './PackageUtils'
+import { DEV_PORT, DEV_HOST, PUBLIC_DIR, SERVER_RENDERING, AUTO_RELOAD } from './Constants'
+
+// should be created by build task already
+const WEBPACK_PATH = path.join(PUBLIC_DIR, 'webpack.config.js')
 
 const PROD = process.env.NODE_ENV === 'production'
+
+function getAppWebpackConfig() {
+  return require(WEBPACK_PATH)
+}
 
 export default function start(cb) {
   validateEnv()
@@ -73,8 +80,7 @@ function logDXStartWarning() {
 }
 
 function runDevServer(cb) {
-  const configPath = path.join(APP_PATH, getDXConfig().webpack)
-  const { ClientConfig } = require(configPath)
+  const { ClientConfig } = getAppWebpackConfig()
   const compiler = webpack(ClientConfig)
   const server = new WebpackDevServer(compiler, ClientConfig.devServer)
   server.listen(DEV_PORT, DEV_HOST, () => {

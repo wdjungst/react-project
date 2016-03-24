@@ -3,15 +3,30 @@ import webpack from 'webpack'
 import path from 'path'
 import fs from 'fs'
 import { log, logError } from './LogUtils'
-import { APP_PATH } from './Constants'
+import { APP_PATH, PUBLIC_DIR } from './Constants'
 import { getDXConfig } from './PackageUtils'
 import ProgressPlugin from 'webpack/lib/ProgressPlugin'
+import { transformFile } from 'babel-core'
+
+const WEBPACK_PATH = path.join(PUBLIC_DIR, 'webpack.config.js')
 
 export default function build(cb) {
   log(`NODE_ENV=${process.env.NODE_ENV}`)
   validateEnv()
-  bundleServer(() => {
-    bundleClient(cb)
+  transpileWebpackConfig(() => {
+    bundleServer(() => {
+      bundleClient(cb)
+    })
+  })
+}
+
+function transpileWebpackConfig(cb) {
+  const configPath = path.join(APP_PATH, getDXConfig().webpack)
+  const options = JSON.parse(fs.readFileSync(path.join(APP_PATH, '.babelrc')))
+  transformFile(configPath, options, (err, result) => {
+    if (err) throw err
+    fs.writeFileSync(WEBPACK_PATH, result.code)
+    cb()
   })
 }
 
@@ -26,7 +41,7 @@ function validateEnv() {
 }
 
 function getAppWebpackConfig() {
-  return require(path.join(APP_PATH, getDXConfig().webpack))
+  return require(WEBPACK_PATH)
 }
 
 function bundleClient(cb) {
