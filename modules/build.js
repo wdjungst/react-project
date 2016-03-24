@@ -7,6 +7,7 @@ import { APP_PATH, PUBLIC_DIR } from './Constants'
 import { getDXConfig } from './PackageUtils'
 import ProgressPlugin from 'webpack/lib/ProgressPlugin'
 import { transformFile } from 'babel-core'
+import { mkdir } from 'shelljs'
 
 const WEBPACK_PATH = path.join(PUBLIC_DIR, 'webpack.config.js')
 
@@ -25,6 +26,7 @@ function transpileWebpackConfig(cb) {
   const options = JSON.parse(fs.readFileSync(path.join(APP_PATH, '.babelrc')))
   transformFile(configPath, options, (err, result) => {
     if (err) throw err
+    mkdir('-p', PUBLIC_DIR)
     fs.writeFileSync(WEBPACK_PATH, result.code)
     cb()
   })
