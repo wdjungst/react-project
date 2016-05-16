@@ -8,7 +8,14 @@ This is brand new, not ready for production unless you are ready and
 willing to contribute to the project. Basically just building something
 we want here, if it interests you, please help :)
 
-Also, it has no tests. Also, it's awesome.
+Also, it has no tests. Also, it's kind of awesome.
+
+## NEEDS NEW OWNER
+
+I was really excited about this but other priorities in my life have come up.
+I won't be developing this. If you would like to take ownership, please
+email me and we can transfer it to you. I'll also give you a brain dump on
+what I was planning to evolve this into. Thanks.
 
 
 
