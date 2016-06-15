@@ -10,17 +10,6 @@ we want here, if it interests you, please help :)
 
 Also, it has no tests. Also, it's kind of awesome.
 
-## NEEDS NEW OWNER
-
-I was really excited about this but other priorities in my life have come up.
-I won't be developing this. If you would like to take ownership, please
-email me and we can transfer it to you. I'll also give you a brain dump on
-what I was planning to evolve this into. Thanks.
-
-
-
-
-
 ## Node/NPM Versions
 
 I'm running node v5.7.0 and npm v3.6.0 as I tinker, there's no plan to
